@@ -1,0 +1,47 @@
+[project]
+name = "chessbook-ai-backend"
+version = "0.1.0"
+description = "Local-first PDF -> interactive chessbook pipeline. Zero external API dependencies."
+requires-python = ">=3.11"
+dependencies = [
+    "fastapi>=0.115",
+    "uvicorn[standard]>=0.32",
+    "python-multipart>=0.0.12",
+    "pydantic>=2.9",
+    "pymupdf>=1.24",
+    "chess>=1.11",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.3",
+    "pytest-asyncio>=0.24",
+    "hypothesis>=6.112",
+    "ruff>=0.7",
+]
+ocr = [
+    "pytesseract>=0.3.13",
+]
+engine = [
+    "stockfish>=1.0"  # ships bundled Stockfish binaries; optional at runtime
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["chessbook"]
+
+[tool.pytest.ini_options]
+testpaths = ["../tests"]
+pythonpath = ["."]
+addopts = "-q"
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+ignore = ["E501"]

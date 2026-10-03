@@ -1,0 +1,9 @@
+node_modules/
+dist/
+data/
+backend/.venv/
+backend/data/
+__pycache__/
+*.pyc
+corpus/pdf/
+.pytest_cache/
